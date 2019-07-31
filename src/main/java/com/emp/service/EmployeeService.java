@@ -11,9 +11,9 @@ public interface EmployeeService {
 
 	public String createEmployee(Employee emp);
 
-	public String updateEmployee(int id, String addr);
+	public String updateEmployee(int id);
 
-	public void deleteEmployee(int id);
+	public String deleteEmployee(int id);
 
 	public Object getEmployeeById(int id);
 

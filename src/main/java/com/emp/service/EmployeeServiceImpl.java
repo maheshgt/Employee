@@ -25,9 +25,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public String updateEmployee(int id, String addr) {
-		Employee emp = empRepo.findById(id).get();
-		emp.setEmpAddress(addr);
+	public String updateEmployee(int id) {
+		Employee emp = (Employee) empRepo.findEmpById(id);
+		emp.setEmpAddress("Jigani");
 		if(empRepo.save(emp)!=null)
 			return "updated successfully";
 		else
@@ -35,8 +35,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public void deleteEmployee(int id) {
+	public String deleteEmployee(int id) {
 		empRepo.deleteById(id);
+		return "delete successfully";
 	}
 
 	@Override
