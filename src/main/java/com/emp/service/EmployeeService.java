@@ -19,5 +19,5 @@ public interface EmployeeService {
 
 	public List<Employee> getEmployeeList();
 
-	public void deleteAllEmployee();
+	//public void deleteAllEmployee();
 }

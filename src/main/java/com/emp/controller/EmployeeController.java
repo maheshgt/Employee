@@ -1,9 +1,10 @@
 package com.emp.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,14 +23,15 @@ public class EmployeeController {
 	EmployeeService empService;
 
 	@PostMapping("/createEmployee")
-	public String createEmployee(@RequestBody Employee emp) {
-		return empService.createEmployee(emp);
+	public ResponseEntity<String> createEmployee(@RequestBody Employee emp) {
+		
+		return new ResponseEntity<>(empService.createEmployee(emp),HttpStatus.OK);
 		
 	}
 
 	@DeleteMapping("/deleteEmployee/{id}")
-	public String deleteEmployee(@PathVariable int id) {
-		return empService.deleteEmployee(id);
+	public ResponseEntity<String> deleteEmployee(@PathVariable int id) {
+		return new ResponseEntity<>(empService.deleteEmployee(id),HttpStatus.OK);
 		
 	}
 
@@ -48,9 +50,8 @@ public class EmployeeController {
 		return empService.updateEmployee(id);
 	}
 
-	@DeleteMapping("/deleteAllEmp")
-	public String deletaAllEmployee() {
-		empService.deleteAllEmployee();
-		return "deleted all Employees";
-	}
+	/*
+	 * @DeleteMapping("/deleteAllEmp") public String deletaAllEmployee() {
+	 * empService.deleteAllEmployee(); return "deleted all Employees"; }
+	 */
 }

@@ -1,7 +1,6 @@
 package com.emp.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +26,17 @@ public class EmpServiceTest {
 
 	@Test
 	public void testCreateEmployee() {
+
 		Employee emp = new Employee(1, "mahesh", "gowtham", "enggineer", "Bangalore");
 		Mockito.when(employeeRepo.save(emp)).thenReturn(emp);
 		String actualValue = employeeService.createEmployee(emp);
 		assertEquals("Saved successfully... ", actualValue);
 	}
-	
+
 	@Test
 	public void testNegativeCreateEmployee() {
+
 		Employee emp = new Employee(1, "mahesh", "gowtham", "enggineer", "Bangalore");
-		//Mockito.when(employeeRepo.save(emp)).thenReturn(emp);
 		String actualValue = employeeService.createEmployee(emp);
 		assertEquals("Plz try again..", actualValue);
 	}
@@ -44,15 +44,8 @@ public class EmpServiceTest {
 	@Test
 	public void testGetEmployeeById() {
 
-		Employee emp = new Employee();
-
-		emp.setEmpId(1);
-		emp.setEmpFirstName("Mahesh");
-		emp.setEmpLastName("Gowtham");
-		emp.setEmpDesignation("Enggineer");
-		emp.setEmpAddress("Bangalore");
-
-		Mockito.when(employeeRepo.findEmpById(Mockito.anyInt())).thenReturn(emp);
+		Employee emp = new Employee(1, "mahesh", "gowtham", "bangalore", "engineer");
+		Mockito.when(employeeRepo.findByEmpId(Mockito.anyInt())).thenReturn(emp);
 		Employee emp1 = (Employee) employeeService.getEmployeeById(1);
 		assertEquals(emp1, emp);
 	}
@@ -75,14 +68,9 @@ public class EmpServiceTest {
 
 	@Test
 	public void testDeleteEmployee() {
-		Employee emp = new Employee();
 
-		emp.setEmpId(1);
-		emp.setEmpFirstName("Mahesh");
-		emp.setEmpLastName("Gowtham");
-		emp.setEmpDesignation("Enggineer");
-		emp.setEmpAddress("Bangalore");
-		// Mockito.when(employeeRepo.findEmpById(Mockito.anyInt())).thenReturn(emp);
+		Employee emp = new Employee(1, "mahesh", "gowtham", "bangalore", "engineer");
+		Mockito.when(employeeRepo.findByEmpId(Mockito.anyInt())).thenReturn(emp);
 		String actual = employeeService.deleteEmployee(Mockito.anyInt());
 		assertEquals("delete successfully", actual);
 	}
@@ -90,24 +78,12 @@ public class EmpServiceTest {
 	@Test
 	public void testUpdateEmployee() {
 
-		Employee emp = new Employee();
+		Employee emp = new Employee(1, "mahesh", "gowtham", "bangalore", "engineer");
+		Mockito.when(employeeRepo.findByEmpId(Mockito.anyInt())).thenReturn(emp);
+		Mockito.when(employeeRepo.save(emp)).thenReturn(emp);
+		String emp1 = employeeService.updateEmployee(1);
+		assertEquals("updated successfully", emp1);
 
-		emp.setEmpId(1);
-		emp.setEmpFirstName("Mahesh");
-		emp.setEmpLastName("Gowtham");
-		emp.setEmpDesignation("Enggineer");
-		emp.setEmpAddress("Bangalore");
-
-		Mockito.when(employeeRepo.findEmpById(Mockito.anyInt())).thenReturn(emp);
-
-		// Mockito.when(employeeRepo.save(emp)).thenReturn(emp);
-
-		String emp1 = employeeService.updateEmployee(5);
-//		if(emp1!=null)
-//			
-//		assertEquals("updated successfully", emp1);
-//		else
-		assertEquals("not updated", emp1);
 	}
 
 }

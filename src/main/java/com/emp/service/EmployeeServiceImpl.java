@@ -26,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public String updateEmployee(int id) {
-		Employee emp = (Employee) empRepo.findEmpById(id);
+		Employee emp = (Employee) empRepo.findByEmpId(id);
 		emp.setEmpAddress("Jigani");
 		if(empRepo.save(emp)!=null)
 			return "updated successfully";
@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Object getEmployeeById(int id) {
-		Employee emp =  (Employee) empRepo.findEmpById(id);
+		Employee emp =  (Employee) empRepo.findByEmpId(id);
 		
 		 if(emp !=null) 
 			 return emp; 
@@ -55,9 +55,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return empRepo.findAll();
 	}
 
-	@Override
-	public void deleteAllEmployee() {
-		empRepo.deleteAll();
-	}
+	
 
 }
